@@ -1,0 +1,33 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="">
+        <ul class="list-unstyled">
+          <li *ngFor="let document of doc.__zone_symbol__value.hits.hits" (click)="onSelect(document)">
+            <a>{{document._source.brief_title}}</a>
+            <br>
+            <br>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="input-group col-md-7">
+          <input #searchBox type="text" class="form-control" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('btnSearch').click()" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button class="btn btn-default" id="btnSearch" type="button" (click)="searchDoc(searchBox.value)">Search!</button>
+          </span>
+      </div><!-- /input-group -->
+
+      <div class="" *ngIf="selectedDoc">
+        <document-details [doc]="selectedDoc"></document-details>
+      </div>
+
+    </div>
+  </div>
+
+</div>

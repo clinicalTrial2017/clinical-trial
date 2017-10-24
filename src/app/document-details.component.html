@@ -1,0 +1,29 @@
+<div>
+  <!-- <div>
+    <button class="btn btn-default" type="button" name="button" (click)="getDoc()">Get Doc</button>
+  </div> -->
+
+  <div class="row">
+    <div class="col-md-offset-1">
+      <h3>{{doc._source.brief_title}}</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      <p>Lead Sponsor: {{doc._source.agency}} {{doc._source.agency_class}}</p>
+      <p>Overall Status: {{doc._source.overall_status}}</p>
+      <p>Start Date: {{doc._source.start_date}}</p>
+    </div>
+
+    <div class="col-md-8">
+      <h4>Brief Summary</h4>
+      <p>{{doc._source.textblock[0]}}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-add-review [docid]="doc._id" [doc]="doc"></app-add-review>
+    <app-view-reviews [docid]="doc._id"></app-view-reviews>
+  </div>
+</div>
