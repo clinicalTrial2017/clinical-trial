@@ -8,7 +8,7 @@ router.get('/:input',function(req, res, next){
   Mongo.connect(url, function(err, db) {
     if (err) throw err;
     console.log(req.params.input);
-    db.collection("customers").find({id:req.params.input}).toArray(
+    db.collection("review").find({id:req.params.input}).toArray(
       function(err, result) {
         if (err) throw err;
         console.log(result);

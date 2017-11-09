@@ -1,34 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Register } from './register';
+
 import { AuthenticationService }    from '../authentication.service'
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [AuthenticationService]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   constructor( private authentication: AuthenticationService ) { }
 
-  vm = {
-    credentials: {
-      name: "",
-      email: "",
-      password: ""
-    }
-  };
+  rg = new Register( '', '', '' );
+
 
   onSubmit = function () {
   this.authentication
-    .register(this.vm.credentials)
+    .register(this.rg)
     .error(function(err){
       alert(err);
     }).then(function(){
       console.log('We Have a User!');
+      console.log(this.rg);
+
     });
 };
 
-  ngOnInit() {
-  }
 
 }

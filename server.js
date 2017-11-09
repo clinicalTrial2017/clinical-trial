@@ -10,23 +10,23 @@ require('./server/app-api/config/passport');
 
 var routesApi = require('./server/app-api/routes/index');
 
+var app = express();
 // Get routes
 const documents = require('./server/routes/documents');
 const insert = require('./server/routes/insert');
 const find = require('./server/routes/find');
 
-const app = express();
 
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(passport.initialize());
+app.use('/api', routesApi);
+
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
 
-
-app.use(passport.initialize());
-app.use('/api', routesApi);
 
 // Set routes
 app.use('/documents', documents);
@@ -43,6 +43,8 @@ app.get('*', (req, res) => {
  */
 const port = process.env.PORT || '3000';
 app.set('port', port);
+
+module.exports = app;
 
 /**
  * Create HTTP server.

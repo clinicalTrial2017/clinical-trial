@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Clinical Trial';
+  signingIn = false;
 
-  // getDoc(): void {
-  //   this.http.get("http://localhost:9200/logstash-2017.08.14/logs/AV3hMbXWYd0ox15Qs4Dy")
-  //   .toPromise().then(response => console.log(response.json()));
-  // }
+  signIn(sign){
+    this.signingIn = sign;
+  }
 }
