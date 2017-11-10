@@ -4,6 +4,10 @@ var router = express.Router();
 var Mongo = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/clinical";
 
+if (process.env.NODE_ENV === 'production') {
+  url = 'mongodb://clinicalTrial2017:clinicalTrial2017!@ds231715.mlab.com:31715/heroku_vrprv3qd';
+}
+
 router.get('/:input',function(req, res, next){
   Mongo.connect(url, function(err, db) {
     if (err) throw err;
