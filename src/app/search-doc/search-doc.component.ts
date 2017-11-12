@@ -22,8 +22,8 @@ export class SearchDocComponent {
 
   searchDoc(term:string): void {
       this.doc = this.searchDocService.search(term);
-      // console.log('Search Documents Componnt!');
-      // console.log(this.doc);
+      console.log('Search Documents Componnt!');
+      console.log(this.doc);
   }
 
   onSelect(doc:Doc): void {

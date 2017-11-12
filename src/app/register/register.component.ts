@@ -16,7 +16,11 @@ export class RegisterComponent {
 
   rg = new Register( '', '', '' );
 
-
+  isLoggedIn = function(){
+      //console.log('is loggedin: ' +  this.authentication.isLoggedIn())
+      return this.authentication.isLoggedIn();
+  }
+  
   onSubmit = function () {
   this.authentication
     .register(this.rg)
@@ -25,7 +29,6 @@ export class RegisterComponent {
     }).then(function(){
       console.log('We Have a User!');
       console.log(this.rg);
-
     });
 };
 

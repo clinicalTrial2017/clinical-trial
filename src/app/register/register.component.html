@@ -1,15 +1,15 @@
-<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+<form *ngIf="!isLoggedIn()" #registerForm="ngForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="email">Email address</label>
     <input [(ngModel)]="rg.email" type="email" class="form-control" id="email" name="email" placeholder="Email">
   </div>
   <div class="form-group">
     <label for="name">Full Name</label>
-    <input [(ngModel)]="rg.credentials.name" type="name" class="form-control" id="name" name="name" placeholder="Full Name">
+    <input [(ngModel)]="rg.name" type="name" class="form-control" id="name" name="name" placeholder="Full Name">
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input [(ngModel)]="rg.credentials.password" type="password" class="form-control" id="password" name="password" placeholder="Password">
+    <input [(ngModel)]="rg.password" type="password" class="form-control" id="password" name="password" placeholder="Password">
   </div>
   <div class="checkbox">
     <label>

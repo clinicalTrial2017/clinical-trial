@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   };
 
   isLoggedIn = function(){
-      console.log('is loggedin: ' +  this.authentication.isLoggedIn())
+      //console.log('is loggedin: ' +  this.authentication.isLoggedIn())
       return this.authentication.isLoggedIn();
   }
 
