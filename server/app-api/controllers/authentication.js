@@ -5,12 +5,12 @@ var User = mongoose.model('User');
 module.exports.register = function(req, res) {
   console.log('starting server regist!');
   var user = new User();
-
+  console.log(req.body);
   user.name = req.body.name;
   user.email = req.body.email;
 
   user.setPassword(req.body.password);
-
+  //console.log(user);
   user.save(function(err) {
     var token;
     token = user.generateJwt();

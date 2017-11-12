@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/add-review/add-review.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n  <h3>Add Review</h3>\r\n\r\n  <form (ngSubmit)=\"onSubmit()\" #reviewForm=\"ngForm\" >\r\n\r\n    <div class=\"form-group\">\r\n      <textarea class=\"form-control\" id=\"review\"\r\n      required\r\n      [(ngModel)]=\"model.reviewText\" name=\"review\"></textarea>\r\n    </div>\r\n    \r\n    <div class=\"form-group\">\r\n      <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!reviewForm.form.valid\">Submit</button>\r\n    </div>\r\n\r\n  </form>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"container\" *ngIf=\"isLoggedIn()\">\r\n  <h3>Add Review</h3>\r\n\r\n  <form (ngSubmit)=\"onSubmit()\" #reviewForm=\"ngForm\" >\r\n\r\n    <div class=\"form-group\">\r\n      <textarea class=\"form-control\" id=\"review\"\r\n      required\r\n      [(ngModel)]=\"model.reviewText\" name=\"review\"></textarea>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!reviewForm.form.valid\">Submit</button>\r\n    </div>\r\n\r\n  </form>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -47,6 +47,7 @@ module.exports = "<div class=\"container\">\r\n  <h3>Add Review</h3>\r\n\r\n  <f
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__review__ = __webpack_require__("../../../../../src/app/add-review/review.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__document__ = __webpack_require__("../../../../../src/app/document.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__insert_data_service__ = __webpack_require__("../../../../../src/app/insert-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__authentication_service__ = __webpack_require__("../../../../../src/app/authentication.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,11 +61,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AddReviewComponent = (function () {
-    function AddReviewComponent(insertData) {
+    function AddReviewComponent(insertData, authentication) {
         this.insertData = insertData;
+        this.authentication = authentication;
         this.model = new __WEBPACK_IMPORTED_MODULE_1__review__["a" /* Review */](this.docid, '');
         this.submitted = false;
+        this.isLoggedIn = function () {
+            //console.log('is loggedin: ' +  this.authentication.isLoggedIn())
+            return this.authentication.isLoggedIn();
+        };
     }
     AddReviewComponent.prototype.onSubmit = function () {
         this.submitted = true;
@@ -87,12 +94,12 @@ AddReviewComponent = __decorate([
         selector: 'app-add-review',
         template: __webpack_require__("../../../../../src/app/add-review/add-review.component.html"),
         styles: [__webpack_require__("../../../../../src/app/add-review/add-review.component.css")],
-        providers: [__WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */], __WEBPACK_IMPORTED_MODULE_4__authentication_service__["a" /* AuthenticationService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__authentication_service__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__authentication_service__["a" /* AuthenticationService */]) === "function" && _c || Object])
 ], AddReviewComponent);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=add-review.component.js.map
 
 /***/ }),
@@ -135,7 +142,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n\r\n<app-navbar [signingIn]=\"signingIn\" (signed)=\"signIn($event)\"></app-navbar>\r\n\r\n<app-register *ngIf=\"signingIn\"></app-register>\r\n\r\n<div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{title}}!\r\n  </h1>\r\n</div>\r\n\r\n\r\n<div>\r\n  <app-search-doc></app-search-doc>\r\n  <!-- <document-details></document-details> -->\r\n</div>\r\n<!-- <div>\r\n  {{DocumentDetails}}\r\n</div> -->\r\n"
+module.exports = "\r\n<app-navbar [signingIn]=\"signingIn\" (signed)=\"signIn($event)\"></app-navbar>\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-4 col-md-offset-3\" *ngIf=\"signingIn\">\r\n      <app-register></app-register>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{title}}!\r\n  </h1>\r\n</div>\r\n\r\n<div>\r\n  <app-search-doc></app-search-doc>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -395,7 +402,7 @@ module.exports = __webpack_require__.p + "glyphicons-halflings-regular.448c34a56
 /***/ "../../../../../src/app/document-details.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <!-- <div>\r\n    <button class=\"btn btn-default\" type=\"button\" name=\"button\" (click)=\"getDoc()\">Get Doc</button>\r\n  </div> -->\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-offset-1\">\r\n      <h3>{{doc._source.brief_title}}</h3>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-2 col-md-offset-1\">\r\n      <p>Lead Sponsor: {{doc._source.agency}} {{doc._source.agency_class}}</p>\r\n      <p>Overall Status: {{doc._source.overall_status}}</p>\r\n      <p>Start Date: {{doc._source.start_date}}</p>\r\n    </div>\r\n\r\n    <div class=\"col-md-8\">\r\n      <h4>Brief Summary</h4>\r\n      <p>{{doc._source.textblock[0]}}</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <app-add-review [docid]=\"doc._id\" [doc]=\"doc\"></app-add-review>\r\n    <app-view-reviews [docid]=\"doc._id\"></app-view-reviews>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div>\r\n  <!-- <div>\r\n    <button class=\"btn btn-default\" type=\"button\" name=\"button\" (click)=\"getDoc()\">Get Doc</button>\r\n  </div> -->\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-offset-1\">\r\n      <h3>{{doc._source.title_official}}</h3>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-md-2 col-md-offset-1\">\r\n      <p>Lead Sponsor: {{doc._source.agency}} {{doc._source.agency_class}}</p>\r\n      <p>Overall Status: {{doc._source.overall_status}}</p>\r\n      <p>Start Date: {{doc._source.start_date}}</p>\r\n    </div>\r\n\r\n    <div class=\"col-md-8\">\r\n      <h4>Brief Summary</h4>\r\n      <p>{{doc._source.textblock[0]}}</p>\r\n    </div>\r\n  </div>\r\n\r\n  <div class=\"row\">\r\n    <app-add-review [docid]=\"doc._id\" [doc]=\"doc\"></app-add-review>\r\n    <app-view-reviews [docid]=\"doc._id\"></app-view-reviews>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -688,7 +695,7 @@ var NavbarComponent = (function () {
             }
         };
         this.isLoggedIn = function () {
-            console.log('is loggedin: ' + this.authentication.isLoggedIn());
+            //console.log('is loggedin: ' +  this.authentication.isLoggedIn())
             return this.authentication.isLoggedIn();
         };
         this.currentUser = function () {
@@ -827,7 +834,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/register/register.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<form #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n  <div class=\"form-group\">\r\n    <label for=\"email\">Email address</label>\r\n    <input [(ngModel)]=\"rg.email\" type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"Email\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"name\">Full Name</label>\r\n    <input [(ngModel)]=\"rg.credentials.name\" type=\"name\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Full Name\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"password\">Password</label>\r\n    <input [(ngModel)]=\"rg.credentials.password\" type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password\">\r\n  </div>\r\n  <div class=\"checkbox\">\r\n    <label>\r\n      <input type=\"checkbox\"> Accept Terms and Conditions\r\n    </label>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-default\">Submit</button>\r\n</form>\r\n"
+module.exports = "<form *ngIf=\"!isLoggedIn()\" #registerForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n  <div class=\"form-group\">\r\n    <label for=\"email\">Email address</label>\r\n    <input [(ngModel)]=\"rg.email\" type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" placeholder=\"Email\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"name\">Full Name</label>\r\n    <input [(ngModel)]=\"rg.name\" type=\"name\" class=\"form-control\" id=\"name\" name=\"name\" placeholder=\"Full Name\">\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"password\">Password</label>\r\n    <input [(ngModel)]=\"rg.password\" type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password\">\r\n  </div>\r\n  <div class=\"checkbox\">\r\n    <label>\r\n      <input type=\"checkbox\"> Accept Terms and Conditions\r\n    </label>\r\n  </div>\r\n  <button type=\"submit\" class=\"btn btn-default\">Submit</button>\r\n</form>\r\n"
 
 /***/ }),
 
@@ -855,6 +862,10 @@ var RegisterComponent = (function () {
     function RegisterComponent(authentication) {
         this.authentication = authentication;
         this.rg = new __WEBPACK_IMPORTED_MODULE_1__register__["a" /* Register */]('', '', '');
+        this.isLoggedIn = function () {
+            //console.log('is loggedin: ' +  this.authentication.isLoggedIn())
+            return this.authentication.isLoggedIn();
+        };
         this.onSubmit = function () {
             this.authentication
                 .register(this.rg)
@@ -975,7 +986,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/search-doc/search-doc.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3\">\r\n      <div class=\"\">\r\n        <ul class=\"list-unstyled\">\r\n          <li *ngFor=\"let document of doc.__zone_symbol__value.hits.hits\" (click)=\"onSelect(document)\">\r\n            <a>{{document._source.brief_title}}</a>\r\n            <br>\r\n            <br>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-9\">\r\n\r\n      <div class=\"input-group col-md-7\">\r\n          <input #searchBox type=\"text\" class=\"form-control\" onkeydown = \"if (event.keyCode == 13)\r\n                        document.getElementById('btnSearch').click()\" placeholder=\"Search for...\">\r\n          <span class=\"input-group-btn\">\r\n            <button class=\"btn btn-default\" id=\"btnSearch\" type=\"button\" (click)=\"searchDoc(searchBox.value)\">Search!</button>\r\n          </span>\r\n      </div><!-- /input-group -->\r\n\r\n      <div class=\"\" *ngIf=\"selectedDoc\">\r\n        <document-details [doc]=\"selectedDoc\"></document-details>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "\r\n<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"col-md-3\">\r\n      <div class=\"\">\r\n        <ul class=\"list-unstyled\">\r\n          <li *ngFor=\"let document of doc.__zone_symbol__value.hits.hits\" (click)=\"onSelect(document)\">\r\n            <a>{{document._source.title_official}}</a>\r\n            <br>\r\n            <br>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-md-9\">\r\n\r\n      <div class=\"input-group col-md-7\">\r\n          <input #searchBox type=\"text\" class=\"form-control\" onkeydown = \"if (event.keyCode == 13)\r\n                        document.getElementById('btnSearch').click()\" placeholder=\"Search for...\">\r\n          <span class=\"input-group-btn\">\r\n            <button class=\"btn btn-default\" id=\"btnSearch\" type=\"button\" (click)=\"searchDoc(searchBox.value)\">Search!</button>\r\n          </span>\r\n      </div><!-- /input-group -->\r\n\r\n      <div class=\"\" *ngIf=\"selectedDoc\">\r\n        <document-details [doc]=\"selectedDoc\"></document-details>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1006,8 +1017,8 @@ var SearchDocComponent = (function () {
     }
     SearchDocComponent.prototype.searchDoc = function (term) {
         this.doc = this.searchDocService.search(term);
-        // console.log('Search Documents Componnt!');
-        // console.log(this.doc);
+        console.log('Search Documents Componnt!');
+        console.log(this.doc);
     };
     SearchDocComponent.prototype.onSelect = function (doc) {
         this.selectedDoc = doc;
@@ -1055,7 +1066,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/view-reviews/view-reviews.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  view-reviews works!\r\n</p>\r\n\r\n<ul class=\"list-unstyled\">\r\n  <li *ngFor=\"let review of reviews.__zone_symbol__value\" >\r\n    <p>{{review.reviewText}}</p>\r\n    <br>\r\n    <br>\r\n  </li>\r\n</ul>\r\n"
+module.exports = "\r\n<ul class=\"list-unstyled\">\r\n  <li *ngFor=\"let review of reviews.__zone_symbol__value\" >\r\n    <p>{{review.reviewText}}</p>\r\n    <br>\r\n    <br>\r\n  </li>\r\n</ul>\r\n"
 
 /***/ }),
 
