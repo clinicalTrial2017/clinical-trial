@@ -34,7 +34,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/add-review/add-review.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <h3>Add Review</h3>\n\n  <form (ngSubmit)=\"onSubmit()\" #reviewForm=\"ngForm\" >\n\n    <div class=\"form-group\">\n      <textarea class=\"form-control\" id=\"review\"\n      required\n      [(ngModel)]=\"model.reviewText\" name=\"review\"></textarea>\n    </div>\n    \n    <div class=\"form-group\">\n      <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!reviewForm.form.valid\">Submit</button>\n    </div>\n\n  </form>\n\n</div>\n"
+module.exports = "<div class=\"container\">\n  <h3>Add Review</h3>\n\n  <form (ngSubmit)=\"onSubmit()\" #reviewForm=\"ngForm\" >\n\n    <div class=\"form-group\">\n      <textarea class=\"form-control\" id=\"review\"\n      required\n      [(ngModel)]=\"model.reviewText\" name=\"review\"></textarea>\n        model :{{model.reviewText}}\n    </div>\n\n    <div class=\"form-group\">\n      <button type=\"submit\" class=\"btn btn-default\" [disabled]=\"!reviewForm.form.valid\">Submit</button>\n    </div>\n\n  </form>\n\n</div>\n"
 
 /***/ }),
 
@@ -44,9 +44,8 @@ module.exports = "<div class=\"container\">\n  <h3>Add Review</h3>\n\n  <form (n
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddReviewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__review__ = __webpack_require__("../../../../../src/app/add-review/review.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__document__ = __webpack_require__("../../../../../src/app/document.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__insert_data_service__ = __webpack_require__("../../../../../src/app/insert-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__document__ = __webpack_require__("../../../../../src/app/document.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__insert_data_service__ = __webpack_require__("../../../../../src/app/insert-data.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -59,11 +58,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var AddReviewComponent = (function () {
     function AddReviewComponent(insertData) {
         this.insertData = insertData;
-        this.model = new __WEBPACK_IMPORTED_MODULE_1__review__["a" /* Review */](this.docid, '');
+        //model = new Review( this.docid , '');
+        this.model = {
+            id: this.docid,
+            reviewText: ''
+        };
         this.submitted = false;
     }
     AddReviewComponent.prototype.onSubmit = function () {
@@ -76,7 +78,7 @@ var AddReviewComponent = (function () {
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__document__["a" /* Doc */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__document__["a" /* Doc */]) === "function" && _a || Object)
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__document__["a" /* Doc */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__document__["a" /* Doc */]) === "function" && _a || Object)
 ], AddReviewComponent.prototype, "doc", void 0);
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
@@ -87,30 +89,13 @@ AddReviewComponent = __decorate([
         selector: 'app-add-review',
         template: __webpack_require__("../../../../../src/app/add-review/add-review.component.html"),
         styles: [__webpack_require__("../../../../../src/app/add-review/add-review.component.css")],
-        providers: [__WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */]]
+        providers: [__WEBPACK_IMPORTED_MODULE_2__insert_data_service__["a" /* InsertDataService */]]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__insert_data_service__["a" /* InsertDataService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__insert_data_service__["a" /* InsertDataService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__insert_data_service__["a" /* InsertDataService */]) === "function" && _b || Object])
 ], AddReviewComponent);
 
 var _a, _b;
 //# sourceMappingURL=add-review.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/add-review/review.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Review; });
-var Review = (function () {
-    function Review(id, reviewText) {
-        this.id = id;
-        this.reviewText = reviewText;
-    }
-    return Review;
-}());
-
-//# sourceMappingURL=review.js.map
 
 /***/ }),
 

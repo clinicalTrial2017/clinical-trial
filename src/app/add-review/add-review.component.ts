@@ -16,7 +16,11 @@ export class AddReviewComponent {
 
   constructor( private insertData: InsertDataService ){}
 
-  model = new Review( this.docid , '');
+  //model = new Review( this.docid , '');
+  model: Review = {
+    id: this.docid,
+    reviewText: ''
+  }
 
   submitted = false;
 

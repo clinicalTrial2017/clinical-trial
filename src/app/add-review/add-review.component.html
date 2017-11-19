@@ -7,8 +7,9 @@
       <textarea class="form-control" id="review"
       required
       [(ngModel)]="model.reviewText" name="review"></textarea>
+        model :{{model.reviewText}}
     </div>
-    
+
     <div class="form-group">
       <button type="submit" class="btn btn-default" [disabled]="!reviewForm.form.valid">Submit</button>
     </div>
