@@ -7,9 +7,24 @@ var client = new elasticsearch.Client({
 });
 
 
+// function Search(term) {
+//   return client.search({
+//     q: term
+//   });
+// }
+
 function Search(term) {
   return client.search({
-    q: term
+    body: {
+      query: {
+        match: {
+          _all: term
+        }
+      },
+      suggest: {
+          text: term
+      }
+    }
   });
 }
 
